@@ -1,5 +1,6 @@
 from collections import UserDict
 from datetime import datetime
+import pickle
 import re
 
 
@@ -32,6 +33,15 @@ class AddressBook(UserDict):
                 print(f'{name}: {self.data[name].Phones.phone}')
         else:
             print('No matches')
+
+    def save_to_file(self, filename):
+        with open(filename, "wb") as file:
+            pickle.dump(self, file)
+
+    def read_from_file(self, filename):
+        with open(filename, "rb") as file:
+            content = pickle.load(file)
+        return content
 
 
 class Record:
