@@ -35,6 +35,17 @@ class AddressBook(UserDict):
         for name, numbers in self.data.items():
             yield f'{name}: {numbers.Phones.phone}'
 
+    def find(self, piece_of_info):
+        res = []
+        for name, numbers in self.data.items():
+            if piece_of_info in name or piece_of_info in str(numbers.Phones.phone):
+                res.append(name)
+        if res:
+            for name in res:
+                print(f'{name}: {self.data[name].Phones.phone}')
+        else:
+            print('No matches')
+
 
 class Record:
     def __init__(self, Name, Phones=None, Birthday=None):
@@ -97,7 +108,6 @@ class Phone(Field):
         for number in phone:
             if 10 <= len(number) <= 12:
                 correct_numbers.append(number)
-                print(correct_numbers)
         self.__phone = correct_numbers
 
 
@@ -184,6 +194,9 @@ def main():
         elif "birthday" in command:
             command = command.removeprefix("birthday ")
             print(CONTACTS.data[Name(command).name].days_to_birthday())
+        elif "find" in command:
+            command = command.removeprefix('find ')
+            CONTACTS.find(command)
         elif command in ("good bye", "bye", "close", "exit"):
             print(close())
             bot_status = False
