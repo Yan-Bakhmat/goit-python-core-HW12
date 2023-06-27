@@ -3,19 +3,6 @@ from datetime import datetime
 import re
 
 
-class Iterable:
-    def __init__(self, len_dict, N=None):
-        self.current_value = 0
-        self.len_dict = len_dict
-        self.N = N
-
-    def __next__(self):
-        if self.current_value < self.len_dict:
-            self.current_value += 1
-            return self.current_value
-        raise StopIteration
-
-
 class AddressBook(UserDict):
     def add_record(self, Record):
         self.update({Record.Name.name: Record})
