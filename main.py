@@ -69,7 +69,7 @@ class Record:
             if int(current_datetime.month) > int(birthday.month) or (int(current_datetime.month) == int(birthday.month) and int(current_datetime.day) >= int(birthday.day)):
                 next_birthday = datetime(
                     year=current_datetime.year+1, month=birthday.month, day=birthday.day)
-                return (next_birthday - current_datetime).days
+                return f"In {(next_birthday - current_datetime).days} days"
             else:
                 next_birthday = datetime(
                     year=current_datetime.year, month=birthday.month, day=birthday.day)
